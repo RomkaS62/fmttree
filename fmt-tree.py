@@ -16,21 +16,21 @@ def main():
 
     parser.add_argument('-I', '--id', type=int, default=0)
     parser.add_argument('-p', '--parent', type=int, default=1)
-    parser.add_argument('--indent', '--indent-marker', type=str, default='  |')
-    parser.add_argument('--item', '--item-marker', type=str, default='  |__ ')
-    parser.add_argument('--last-item', '--last-item-marker', type=str, default=r'  \__ ')
+    parser.add_argument('--indent', '--indent-marker', type=str, default='  \u2502')
+    parser.add_argument('--item', '--item-marker', type=str, default='  \u251c\u2500 ')
+    parser.add_argument('--last-item', '--last-item-marker', type=str, default='  \u2514\u2500 ')
     parser.add_argument('--os', '--output-separator', type=str, default=' ')
     parser.add_argument('--full-text', action='store_true')
 
     output_width = 120
 
     try:
-        tsize = os.get_terminal_size()
+        terminal_size = os.get_terminal_size()
     except:
-        tsize = None
+        terminal_size = None
 
-    if tsize != None:
-        output_width = tsize.columns
+    if terminal_size != None:
+        output_width = terminal_size.columns
 
     parser.add_argument('-o', '--output-width', type=int, default=output_width)
 
