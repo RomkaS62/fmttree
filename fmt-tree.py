@@ -17,8 +17,8 @@ def main():
     parser.add_argument('-I', '--id', type=int, default=0)
     parser.add_argument('-p', '--parent', type=int, default=1)
     parser.add_argument('--indent', '--indent-marker', type=str, default='  |')
-    parser.add_argument('--item', '--item-marker', type=str, default='__ ')
-    parser.add_argument('--last-item', '--last-item-marker', type=str, default=r'\_ ')
+    parser.add_argument('--item', '--item-marker', type=str, default='  |__ ')
+    parser.add_argument('--last-item', '--last-item-marker', type=str, default=r'  \__ ')
     parser.add_argument('--os', '--output-separator', type=str, default=' ')
     parser.add_argument('--full-text', action='store_true')
 
@@ -118,8 +118,8 @@ class AsciiTreeFormatter:
             output_width,
             node_formatter,
             indent_marker='  |',
-            item_marker='__ ',
-            last_item_marker='\\_'):
+            item_marker='  |__ ',
+            last_item_marker=r'  \__ '):
 
         self.output_width = output_width
         self.node_formatter = node_formatter
@@ -145,7 +145,7 @@ class AsciiTreeFormatter:
             if state.at == 0:
                 tokens = []
 
-                for prev_state in print_states[:-1]:
+                for prev_state in print_states[:-2]:
                     if prev_state.at < len(prev_state.node.subnodes):
                         tokens.append(self.indent_marker)
                     else:
